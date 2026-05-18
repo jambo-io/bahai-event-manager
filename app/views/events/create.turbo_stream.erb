@@ -1,0 +1,7 @@
+<%= turbo_stream.update "events" do %>
+  <% Event.order(date: :asc).each do |event| %>
+    <%= render "events/event", event: event %>
+  <% end %>
+<% end %>
+<%= turbo_stream.replace "new_event_form", partial: "events/new_event_form", locals: { event: Event.new } %>
+<%= turbo_stream.remove "no_events" %>

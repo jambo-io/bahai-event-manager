@@ -1,0 +1,35 @@
+<div id="new_event_form" class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+  <h2 class="text-base font-semibold text-gray-800 mb-5">Add New Event</h2>
+
+  <%= form_with model: event, url: events_path, class: "flex flex-col gap-4" do |f| %>
+    <div>
+      <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Sacred Day</label>
+      <%= f.text_field :title,
+          placeholder: "e.g. Naw-Rúz, Ridván…",
+          class: "w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition #{"border-red-400 focus:ring-red-400" if event.errors[:title].any?}" %>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Sacred day date</label>
+        <%= f.date_field :date,
+            class: "w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition #{"border-red-400 focus:ring-red-400" if event.errors[:date].any?}" %>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
+          Celebration date
+          <span class="text-gray-400 font-normal normal-case tracking-normal ml-1">(optional)</span>
+        </label>
+        <%= f.date_field :celebration_date,
+            class: "w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" %>
+      </div>
+    </div>
+
+    <% if event.errors.any? %>
+      <p class="text-xs text-red-500 -mt-1"><%= event.errors.full_messages.to_sentence %></p>
+    <% end %>
+
+    <%= f.submit "Add Event",
+        class: "w-full rounded-lg bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white py-2.5 text-sm font-semibold cursor-pointer transition-colors" %>
+  <% end %>
+</div>
