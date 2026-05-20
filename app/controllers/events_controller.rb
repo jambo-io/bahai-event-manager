@@ -30,7 +30,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    update_attrs = params.require(:event).permit(:date, :host_name, :address, :celebration_date)
+    update_attrs = params.require(:event).permit(:date, :host_name, :address, :celebration_date, :celebration_time)
     @event.update(update_attrs.transform_values { |v| v.presence })
     respond_to do |format|
       format.turbo_stream
@@ -41,6 +41,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :date, :celebration_date)
+    params.require(:event).permit(:title, :date, :celebration_date, :celebration_time)
   end
 end
